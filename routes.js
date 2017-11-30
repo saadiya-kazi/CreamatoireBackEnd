@@ -3,7 +3,7 @@
 //
 var routes = function(app) {
 //
-// This rouet processes GET requests, by using the `get()` method in express, and we're looking for them on
+// This route processes GET requests, by using the `get()` method in express, and we're looking for them on
 // the root of the application (in this case that's https://rest-api.glitch.me/), since we've
 // specified `"/"`.  For any GET request received at "/", we're sending some HTML back and logging the
 // request to the console. The HTML you see in the browser is what `res.send()` is sending back.
