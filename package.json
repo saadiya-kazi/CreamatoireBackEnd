@@ -11,7 +11,7 @@
 		"body-parser":"1.14.2"
 	},
 	"engines": {
-		"node": "4.4.5"
+		"node": "6.x"
 	},
 	"keywords": [
 		"node",
