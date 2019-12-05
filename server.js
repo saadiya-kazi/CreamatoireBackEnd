@@ -10,7 +10,9 @@ var bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
-var URL ="mongodb+srv://saadiya:5ivFlznnaNTRkzJ7@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
+var CONNECTION_URL ="mongodb+srv://saadiya:5ivFlznnaNTRkzJ7@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
+var DATABASE_NAME = "TESTDB";
+var database, collection;
 var app = express();
  
 app.use(bodyParser.json());
@@ -20,4 +22,12 @@ var routes = require("./routes.js")(app);
  
 var server = app.listen(3000, function () {
   console.log("Listening on port %s", server.address().port);
+   MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+        if(error) {
+            throw error;
+        }
+        database = client.db(DATABASE_NAME);
+        collection = database.collection("TESTCOLL");
+        console.log("Connected to `" + DATABASE_NAME + "`!");
+    });
 });
