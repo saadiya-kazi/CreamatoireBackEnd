@@ -10,7 +10,7 @@ var bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
-var CONNECTION_URL ="mongodb+srv://saadiya:5ivFlznnaNTRkzJ7@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
+var CONNECTION_URL ="mongodb+srv://saadiya:aCj617s3fbR4lUCq@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
 var DATABASE_NAME = "TESTDB";
 var database, collection;
 var app = express();
@@ -20,13 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
  
 var routes = require("./routes.js")(app);
  
-app.get("/getPickUpOrders", function(req, res) {
-    console.log("app", app)
-      const response = collection.find();
-      console.log("Received GET", response);
-      res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
 
-    });
 var server = app.listen(3000, function () {
   console.log("Listening on port %s", server.address().port);
    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
@@ -35,8 +29,16 @@ var server = app.listen(3000, function () {
         }
         database = client.db(DATABASE_NAME);
         collection = database.collection("TESTCOLL");
-       
+     
         console.log("Connected to `" + DATABASE_NAME + "`!");
+    });
+    app.get("/getPickUpOrders",  function async(req, res) {
+      console.log("app", app)
+      collection.find((response)=>{
+        console.log("Received GET", response);
+      });
+      
+      res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
     });
 });
 
