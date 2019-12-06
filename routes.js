@@ -12,8 +12,15 @@ var routes = function(app) {
     res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
     console.log("Received GET");
   });
+app.get("/getPickUpOrders", function(req, res) {
+    res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
+    console.log("Received GET");
+  });
 
-//
+  app.get("/getPreparingOrders", function(req, res) {
+    res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
+    console.log("Received GET");
+  });
 // A route for POST requests sent to `/update`. Imagine we have an app and we want an API call for passing
 // data related to an account. In this route we're checking that the POST request contains two parameters,
 // `username` and `data`. If it does have them, then we're logging the contents to the console and just
