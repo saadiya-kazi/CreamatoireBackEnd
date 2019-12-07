@@ -32,8 +32,8 @@ var server = app.listen(3000, function () {
      
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
-    app.get("/getPickUpOrders", function(req, res) {
-      collection.findOne({}, function(response) {
+    app.get("/getIngredients", function(req, res) {
+      collection.find({}).toArray(function(error, response) {
         console.log("response", response)
       });
       
