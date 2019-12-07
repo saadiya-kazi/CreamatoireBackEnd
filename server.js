@@ -6,26 +6,28 @@
 // port to listen to for requests. In this case, port 3000.
 // 
 var express = require("express");
+var socketIo = require("socket.io");
+var app = express();
+var http = require("http").createServer(app);
+// const io = socketIo(http);
 var bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
-var socketIo = require("socket.io");
+
+const port = process.env.PORT || 3000;
 
 var CONNECTION_URL ="mongodb+srv://saadiya:lF70OeVN5ZBnplug@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
 var DATABASE_NAME = "TESTDB";
 var database, collection, collectionOrders;
-var app = express();
- var http = require("http").createServer(app);
-const io = socketIo(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
  
-var routes = require("./routes.js")(app);
+// var routes = require("./routes.js")(app);
  
 
-var server = app.listen(3000, function () {
-  console.log("Listening on port %s", server.address().port);
+http.listen(port, function () {
+  console.log("Listening on port %s", port);
    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if(error) {
             throw error;
@@ -96,5 +98,25 @@ var server = app.listen(3000, function () {
     
    });
 });
+
+
+
+// io.on("connection", function(socket) {
+//   console.log("user connected");
+//   // socket.emit("FromAPI", "hi");
+//   socket.on("subscribe", function(room) {
+//     console.log("joining room", room);
+//     socket.join(room);
+//   });
+//   socket.on("unsubscribe", function(room) {
+//     console.log("left room", room);
+//     socket.leave(room);
+//   });
+//   socket.on("disconnect", function() {
+//     console.log("user disconnected");
+//   });
+// });
+
+
 
   
