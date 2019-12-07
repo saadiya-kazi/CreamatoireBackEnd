@@ -32,10 +32,11 @@ var server = app.listen(3000, function () {
      
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
-    app.get("/getIngredients", function(req, res) {
-      collection.find({}).toArray(function(error, response) {
+    app.get("/getIngredientsList", function(req, res) {
+      return collection.find({}).toArray(function(error, response) {
         console.log("response", response)
-      });
+        return res.send(response)
+    });
       
       
       res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
