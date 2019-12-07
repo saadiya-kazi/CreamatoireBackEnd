@@ -40,7 +40,7 @@ var server = app.listen(3000, function () {
     });
     });
    app.get("/getOrderBeingPrepared", function(req, res) {
-      return collectionOrders.find({status: "start preparing"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+      return collectionOrders.find({status: "being prepared"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
     });
@@ -56,8 +56,7 @@ var server = app.listen(3000, function () {
   app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
      const object = {
-       
-       status: "start preparing",
+       status: "being prepared",
      }
      object['ingredientList'] = req.body.ingredientList
      console.log("object", object)
