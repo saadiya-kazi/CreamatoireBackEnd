@@ -30,14 +30,14 @@ var routes = require("./routes.js")(app);
     });
     });
    app.get("/getOrderBeingPrepared", function(req, res) {
-      return collectionOrders.find({status: "being_prepared"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+      return collectionOrders.find({nexStatus: "being_prepared"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
     });
     });
   
   app.get("/getOrderReadyForPickup", function(req, res) {
-      return collectionOrders.find({status: "ready_for_pickup"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+      return collectionOrders.find({nexStatus: "ready_for_pickup"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
     });
@@ -52,7 +52,7 @@ var routes = require("./routes.js")(app);
     const query = {
       orderNo:  req.body.orderNo
     }
-    var newStatus = { $set: { status: req.body.status } }
+    var newStatus = { $set: { status: req.body.status , nextStatus:req.body.status } }
     return collectionOrders.updateOne(query, newStatus, function(err, response) {
         io.to(1).emit("OrderStatusUpdate", {success: true, message: "Updated Successfully", data: req.body});
 
@@ -64,6 +64,7 @@ var routes = require("./routes.js")(app);
      console.log("reqBody", req.body)
      const object = {
        status: "waiting",
+       nextStatus: ""
      }
      object['ingredientList'] = req.body.ingredientList
      console.log("object", object)
