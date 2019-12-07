@@ -12,7 +12,7 @@ const ObjectId = require("mongodb").ObjectID;
 
 var CONNECTION_URL ="mongodb+srv://saadiya:lF70OeVN5ZBnplug@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
 var DATABASE_NAME = "TESTDB";
-var database, collection;
+var database, collection, collectionOrders;
 var app = express();
  
 app.use(bodyParser.json());
@@ -29,6 +29,7 @@ var server = app.listen(3000, function () {
         }
         database = client.db(DATABASE_NAME);
         collection = database.collection("TESTCOLL");
+       collectionOrders = database.collection("TESTORDERS")
      
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
@@ -36,6 +37,16 @@ var server = app.listen(3000, function () {
       return collection.find({}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
+    });
+    app.get("/createOrder", function(req, res) {
+      return collectionOrders.find({}).toArray(function(error, response) {
+        console.log("response", response)
+        if(response.length === 0) {
+            return collectionOrders.save()
+        } else {
+          
+        }
+        
     });
       
       
