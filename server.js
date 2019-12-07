@@ -58,7 +58,13 @@ var server = app.listen(3000, function () {
         return res.send(response)
     });
     });
-  
+  app.put('updateStatus', function(req, res) {
+    const query = {
+      orderNo:  req.body.orderNo
+    }
+    var newStatus = { $set: { status: req.body.status } }
+    
+  })
   app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
      const object = {
