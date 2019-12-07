@@ -39,7 +39,12 @@ var server = app.listen(3000, function () {
         return res.send(response)
     });
     });
-  
+   app.get("/getOrderBeingPrepared", function(req, res) {
+      return collectionOrders.find({status: "start preparing"}).toArray(function(error, response) {
+        console.log("response", response)
+        return res.send(response)
+    });
+    });
    app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
      const object = {
@@ -56,7 +61,7 @@ var server = app.listen(3000, function () {
             return res.send({ success: true, message:"Data Saved Successfully", data:object })
           })
         } else {
-          object['orderNo'] = response.length;
+          object['orderNo'] = response.length +1;
            return collectionOrders.insertOne(object, function(error, responseSave) {
             return res.send({ success: true, message:"Data Saved Successfully", data:object })
           })
