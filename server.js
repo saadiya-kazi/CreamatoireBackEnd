@@ -63,7 +63,7 @@ var routes = require("./routes.js")(app);
   app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
      const object = {
-       status: "being_prepared",
+       status: "waiting",
      }
      object['ingredientList'] = req.body.ingredientList
      console.log("object", object)
