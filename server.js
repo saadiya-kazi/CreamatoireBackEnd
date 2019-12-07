@@ -58,12 +58,15 @@ var server = app.listen(3000, function () {
         return res.send(response)
     });
     });
-  app.put('updateStatus', function(req, res) {
+  app.put('/updateStatus', function(req, res) {
     const query = {
       orderNo:  req.body.orderNo
     }
     var newStatus = { $set: { status: req.body.status } }
-    
+    return collectionOrders.updateOne(query, newStatus, function(err, response) {
+      return res.send({success: true, message: "Updated Successfully", data: req.body})
+    })
+
   })
   app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
