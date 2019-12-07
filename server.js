@@ -38,19 +38,27 @@ var server = app.listen(3000, function () {
         console.log("response", response)
         return res.send(response)
     });
-    app.get("/createOrder", function(req, res) {
+    });
+  
+   app.post("/createOrder", function(req, res) {
+     console.log("reqBody", req.body)
+     const object = {
+       ingredientList:  req.body,
+       status: "start preparing",
+    
+     }
       return collectionOrders.find({}).toArray(function(error, response) {
         console.log("response", response)
         if(response.length === 0) {
-            return collectionOrders.save()
+          object['orderNo'] = 1
+          return collectionOrders.insertOne(object, function(error, responseSave) {
+            return res.send({ success: true, message:"Data Saved Successfully", data:object })
+          })
         } else {
-          
+          object
         }
         
     });
-      
-      
-      res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
     });
 });
 
