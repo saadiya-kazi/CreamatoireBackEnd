@@ -749,4 +749,4 @@ specifiers:
   body-parser: 1.14.2
   express: ^4.12.4
   mongodb: ^3.3.4
-  socket.io: ^2.2.0
+  socket.io: ^2.3.0
