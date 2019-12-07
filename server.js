@@ -30,14 +30,14 @@ var routes = require("./routes.js")(app);
     });
     });
    app.get("/getOrderBeingPrepared", function(req, res) {
-      return collectionOrders.find({nexStatus: "being_prepared"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
-        console.log("response", response)
+      return collectionOrders.find({status: "being_prepared"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+        console.log("response1", response)
         return res.send(response)
     });
     });
   
   app.get("/getOrderReadyForPickup", function(req, res) {
-      return collectionOrders.find({nexStatus: "ready_for_pickup"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+      return collectionOrders.find({status: "ready_for_pickup"},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
     });
