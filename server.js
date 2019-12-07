@@ -10,7 +10,7 @@ var bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
-var CONNECTION_URL ="mongodb+srv://saadiya:aCj617s3fbR4lUCq@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
+var CONNECTION_URL ="mongodb+srv://saadiya:lF70OeVN5ZBnplug@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
 var DATABASE_NAME = "TESTDB";
 var database, collection;
 var app = express();
@@ -32,11 +32,11 @@ var server = app.listen(3000, function () {
      
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
-    app.get("/getPickUpOrders",  function async(req, res) {
-      console.log("app", app)
-      collection.find((response)=>{
-        console.log("Received GET", response);
+    app.get("/getPickUpOrders", function(req, res) {
+      collection.findOne({}, function(response) {
+        console.log("response", response)
       });
+      
       
       res.send("<h1>REST API</h1><p>Oh, hi! There's not much to see here - view the code instead</p><script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div>");
     });
