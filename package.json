@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "^4.12.4",
     "body-parser": "1.14.2",
-    "mongodb": "^3.3.4"
+    "mongodb": "^3.3.4",
+    "socket.io": "^2.3.0"
   },
   "engines": {
     "node": "6.x"

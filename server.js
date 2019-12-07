@@ -9,12 +9,15 @@ var express = require("express");
 var bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
+var socketIo = require("socket.io");
 
 var CONNECTION_URL ="mongodb+srv://saadiya:lF70OeVN5ZBnplug@boutique-tqqvs.mongodb.net/test?retryWrites=true&w=majority"
 var DATABASE_NAME = "TESTDB";
 var database, collection, collectionOrders;
 var app = express();
- 
+ var http = require("http").createServer(app);
+const io = socketIo(http);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
  
