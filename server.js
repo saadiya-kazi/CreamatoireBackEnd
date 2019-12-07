@@ -43,10 +43,11 @@ var server = app.listen(3000, function () {
    app.post("/createOrder", function(req, res) {
      console.log("reqBody", req.body)
      const object = {
-       ingredientList:  req.body,
+       
        status: "start preparing",
-    
      }
+     object['ingredientList'] = req.body.ingredientList
+     console.log("object", object)
       return collectionOrders.find({}).toArray(function(error, response) {
         console.log("response", response)
         if(response.length === 0) {
@@ -55,11 +56,15 @@ var server = app.listen(3000, function () {
             return res.send({ success: true, message:"Data Saved Successfully", data:object })
           })
         } else {
-          object
+          object['orderNo'] = response.length;
+           return collectionOrders.insertOne(object, function(error, responseSave) {
+            return res.send({ success: true, message:"Data Saved Successfully", data:object })
+          })
         }
         
     });
-    });
+    
+   });
 });
 
   
