@@ -72,11 +72,14 @@ var routes = require("./routes.js")(app);
         if(response.length === 0) {
           object['orderNo'] = 1
           return collectionOrders.insertOne(object, function(error, responseSave) {
+            io.to(1).emit("OrderListUpdate", { success: true, message:"Data Saved Successfully", data:object })
             return res.send({ success: true, message:"Data Saved Successfully", data:object })
           })
         } else {
           object['orderNo'] = response.length +1;
            return collectionOrders.insertOne(object, function(error, responseSave) {
+            io.to(1).emit("OrderListUpdate", { success: true, message:"Data Saved Successfully", data:object })
+             
             return res.send({ success: true, message:"Data Saved Successfully", data:object })
           })
         }
