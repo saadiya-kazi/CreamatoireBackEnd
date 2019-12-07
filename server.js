@@ -47,7 +47,7 @@ var server = app.listen(3000, function () {
     });
   
    app.get("/getAllOrders", function(req, res) {
-      return collectionOrders.find({},  {projection: {  _id: 0,orderNo: 1 }}).toArray(function(error, response) {
+      return collectionOrders.find({}).toArray(function(error, response) {
         console.log("response", response)
         return res.send(response)
     });
